@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: zuul-server
+    
+server:
+  port: 8303
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8302/eureka/
+  instance:
+    hostname: localhost
+
+zuul:
+  #Service will be mapped under the /api URI
+  prefix: /api
+  routes:
+    dao-service:
+      path: /dao-service/**
+      url: http://localhost:8300
+    stock-service:
+      path: /stock-service/**
+      url: http://localhost:8301
